@@ -155,6 +155,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\render.cpp" />
     <ClCompile Include="..\Classes\shape.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="point.cpp" />
     <ClCompile Include="shapeGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>

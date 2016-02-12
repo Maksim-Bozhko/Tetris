@@ -41,7 +41,7 @@ namespace MyTetris
 		}
 		virtual bool tryToExecute(Shape& shape, Map& map)
 		{
-			return shape.Move(MyTetris::Point(-1, 0), map);
+			return shape.Move(MyTetris::Point::LEFT, map);
 		}
 	};
 
@@ -54,7 +54,7 @@ namespace MyTetris
 		}
 		virtual bool tryToExecute(Shape& shape, Map& map)
 		{
-			return shape.Move(Point(1, 0), map);
+			return shape.Move(Point::RIGHT, map);
 		}
 	};
 
@@ -67,7 +67,7 @@ namespace MyTetris
 		}
 		virtual bool tryToExecute(Shape& shape, Map& map)
 		{
-			return shape.Move(Point(0, 1), map);
+			return shape.Move(Point::DOWN, map);
 		}
 	};
 

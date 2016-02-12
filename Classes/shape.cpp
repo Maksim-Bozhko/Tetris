@@ -244,7 +244,7 @@ void Shape::Draw(vec2d_cocos2d_Color4F& buffer)
 	}
 }
 
-bool Shape::Move(Point& direction, Map& map)
+bool Shape::Move(const Point& direction, Map& map)
 {
 	bool collisionHappened = true;
 	if (_hasLanded == false)
@@ -256,7 +256,7 @@ bool Shape::Move(Point& direction, Map& map)
 		{//no collisions detected, we can modify actual position
 			_matrixPosition += direction;
 		}
-		else if (direction == Point(0, 1))//we are trying to move down but we cant, that means shape landed
+		else if (direction == Point::DOWN)//we are trying to move down but we cant, that means shape landed
 		{
 			_hasLanded = true;
 		}
@@ -307,24 +307,24 @@ bool Shape::TryToRotate(vec2d_unsignedChar& newMatrix, Point& newPosition, Map& 
 	if (collisionHappened)//now we need to check if there is any wall kicks avaliable
 	{
 		//try to move to the left
-		newPosition = _matrixPosition + Point(-1, 0);//TODO: make left,right,up,down
+		newPosition = _matrixPosition + Point::LEFT;//TODO: make left,right,up,down
 		collisionHappened = CheckForCollision(newMatrix, newPosition, map);//if there is no collision function retruns false and we rotate shape
 		if (collisionHappened)//cant wall kick to the left, now lets try to the right
 		{
 			//try to move to the right
-			newPosition = _matrixPosition + Point(1, 0);
+			newPosition = _matrixPosition + Point::RIGHT;
 			collisionHappened = CheckForCollision(newMatrix, newPosition, map);
 		}
 
 		if (collisionHappened && _boxSize == 4)//I shape might need to move 2 tiles for wall kick
 		{
 			//try to move to the left 2 tiles
-			newPosition = _matrixPosition + Point(-2, 0);
+			newPosition = _matrixPosition + Point::LEFT * 2;;
 			collisionHappened = CheckForCollision(newMatrix, newPosition, map);
 			if (collisionHappened)//cant wall kick to the left, now lets try to the right
 			{
 				//try to move to the right 2 tiles
-				newPosition = _matrixPosition + Point(2, 0);
+				newPosition = _matrixPosition + Point::RIGHT * 2;
 				collisionHappened = CheckForCollision(newMatrix, newPosition, map);
 			}
 		}

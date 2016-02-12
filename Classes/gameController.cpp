@@ -60,7 +60,7 @@ bool GameController::Update(std::chrono::time_point<std::chrono::system_clock>& 
 		else
 		{
 			//apply gravity
-			_currentShape.Move(Point(0, 1), _map);
+			_currentShape.Move(Point::DOWN, _map);
 			previousTime = currentTime;//we only need to remember time when block moved down 1 tile
 			stateChanged = true;
 		}

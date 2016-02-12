@@ -52,7 +52,7 @@ namespace MyTetris
 		};
 		bool RotateClocklWise(Map& map);
 		void Draw(vec2d_cocos2d_Color4F& buffer);
-		bool Move(Point& direction, Map& map);
+		bool Move(const Point& direction, Map& map);
 		bool CheckForCollision(vec2d_unsignedChar& newMatrix, const Point& newPosition, Map& map);
 		bool TryToRotate(vec2d_unsignedChar& newMatrix, Point& newPosition, Map& map);
 		void LandShape(Map& map);

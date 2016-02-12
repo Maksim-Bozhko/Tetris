@@ -20,17 +20,38 @@ namespace MyTetris
 			y += rhs.y;
 			return *this;
 		}
+		Point& operator*=(const int& rhs)
+		{
+			x *= rhs;
+			y *= rhs;
+			return *this;
+		}
 
-		bool operator==(const Point& rhs)
+		/*bool operator==(const Point& rhs)
 		{
 			return x == rhs.x && y == rhs.y;
-		}
+		}*/
+
+		static const Point UP;
+		static const Point DOWN;
+		static const Point LEFT;
+		static const Point RIGHT;
 	};
 
 	inline Point operator+(Point lhs, const Point& rhs)
 	{
 		lhs += rhs;
 		return lhs;
+	}
+	inline Point operator*(Point lhs, const int& rhs)
+	{
+		lhs *= rhs;
+		return lhs;
+	}
+
+	inline bool operator==(const Point& lhs, const Point& rhs)
+	{
+		return lhs.x == rhs.x && lhs.y == rhs.y;
 	}
 };
 
