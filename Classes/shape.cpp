@@ -27,7 +27,7 @@ Shape::Shape(ShapeType shapeType)
 	for (auto& it : _matrixRepresentation)
 	{
 		it.resize(_matrixSize);
-		it.assign(_matrixSize, 1);
+		it.assign(_matrixSize, 0);
 	}
 
 	_boxSize = 3;//most of shapes fit in box of size 3x3
@@ -94,12 +94,9 @@ void Shape::SetShape(ShapeType shapeType)
 	_hasLanded = false;
 
 	//initialize 2d array with 0
-	for (size_t i = 0; i < _matrixSize; ++i)
+	for (auto& it : _matrixRepresentation)
 	{
-		for (size_t j = 0; j < _matrixSize; ++j)
-		{
-			_matrixRepresentation[i][j] = 0;
-		}
+		it.assign(_matrixSize, 0);
 	}
 
 	_boxSize = 3;//most of shapes fit in box of size 3x3
@@ -227,7 +224,9 @@ void Shape::Draw(vec2d_cocos2d_Color4F& buffer)
 				position.SetXY(x, y);
 				position += _matrixPosition;
 				//make sure we are not out of borders, so shape can start above the screen
-				if (0 <= position.y && position.y < buffer.size() && 0 <= position.x && position.x < buffer[position.y].size())
+				bool yIsInBorders = (0 <= position.y) && (position.y < buffer.size());
+				
+				if ( yIsInBorders && (0 <= position.x) && (position.x < buffer[position.y].size()) )
 				{
 					buffer[position.y][position.x] = _color;
 				}
@@ -345,7 +344,12 @@ void Shape::LandShape(Map& map)
 			{
 				position.SetXY(x, y);
 				position += _matrixPosition;
-				map.SetValueAt(position, TileType::brick);
+				bool yIsInBorders = (0 <= position.y) && (position.y < map.GetHeight());
+				bool xIsInBorders = (0 <= position.x) && (position.x < map.GetWidth());
+				if (yIsInBorders && xIsInBorders)
+				{
+					map.SetValueAt(position, TileType::brick);
+				}
 			}
 		}
 	}

@@ -32,7 +32,7 @@ void MenuPanel::Draw(vec2d_cocos2d_Color4F& buffer)
 
 	std::string scoreString;
 	scoreString = "Score: " + std::to_string(_score);
-	_scoreLabel->setString(scoreString);
+	//_scoreLabel->setString(scoreString);
 }
 
 void MenuPanel::IncreaseScore()
@@ -56,18 +56,22 @@ void MenuPanel::Init(const Map& map, cocos2d::Node& node)
 	_width = _shape.GetMatrixSize() + 2 * map.GetBorderWidth();//width of box where upcoming bos is shown
 															   //move this to caclulate width, make more obvious
 	_height = map.GetHeight();//height of panel is same as height of the map
-
-	if (_scoreLabel)
+	
+	//TODO: check _scorelabel
+	/*if (_scoreLabel)
 	{
 		node.removeChild(_scoreLabel);
 		_scoreLabel->release();
-	}
+	}*/
 	
-	_scoreLabel = cocos2d::Label::createWithTTF("Score: 0", "fonts/Marker Felt.ttf", 24);
+	/*if (_scoreLabel == nullptr)
+	{
+		_scoreLabel = cocos2d::Label::createWithTTF("Score: 0", "fonts/Marker Felt.ttf", 24);
 
-	_scoreLabel->setAnchorPoint(cocos2d::Vec2(0, 1));
-	_scoreLabel->setPosition((map.GetWidth() + 2) * (20 + 4), (_height - (_width + 2)) * (20 + 4));
-	_scoreLabel->setName("scoreLabel");
+		_scoreLabel->setAnchorPoint(cocos2d::Vec2(0, 1));
+		_scoreLabel->setPosition((map.GetWidth() + 2) * (20 + 4), (_height - (_width + 2)) * (20 + 4));
+		_scoreLabel->setName("scoreLabel");
 
-	node.addChild(_scoreLabel, 0);
+		node.addChild(_scoreLabel, 0);
+	}*/
 }
