@@ -2,7 +2,6 @@
 #include "AppDelegate.h"
 #include "cocos2d.h"
 
-//TODO: все проходы по вектору как в с++ 11
 //TODO: observer между Map и Shape, подумать где ещё
 //TODO: deal with includes
 

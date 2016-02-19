@@ -1,7 +1,8 @@
 #include "../proj.win32/main.h"
 #include "gameController.h"
+#include "TetrisScene.h"
 
-using namespace MyTetris;
+using namespace Tetris;
 
 GameController::GameController() : _inputHandler(&_map, &_currentShape)
 {
@@ -9,6 +10,8 @@ GameController::GameController() : _inputHandler(&_map, &_currentShape)
 	_objectsToDraw.push_back(&_map);//objects are placed on the screen starting from first element of the vector
 	_objectsToDraw.push_back(&_menuPanel);
 	_objectsToDraw.push_back(&_currentShape);//last object is on top of every other
+
+	_stateChanged = false;
 }
 
 GameController::~GameController()
@@ -16,19 +19,12 @@ GameController::~GameController()
 
 }
 
-void GameController::GameLoop(cocos2d::Layer* layer)
+void GameController::GameLoop(TetrisScene* scene)
 {
 	//WTF why 2 calls of draw
-	_render.Draw(_objectsToDraw, layer);
-	/*while (true)
-	{*/
-		bool stateChanged = _inputHandler.updateInput(_time) || Update(_time);
-		
-		if (stateChanged)
-		{
-			_render.Draw(_objectsToDraw, layer);
-		}
-	/*}*/
+	_stateChanged = false;
+	
+	_stateChanged = _inputHandler.updateInput(_time) || Update(_time);
 }
 
 bool GameController::Update(std::chrono::time_point<std::chrono::system_clock>& previousTime)
@@ -147,4 +143,14 @@ void GameController::NewGame(cocos2d::Node& node)
 	_time = std::chrono::system_clock::now();
 
 	NewShape();
+}
+
+std::vector<IDrawable*>& Tetris::GameController::GetObjectsToDraw()
+{
+	return _objectsToDraw;
+}
+
+bool Tetris::GameController::GetStateChanged() const
+{
+	return _stateChanged;
 }

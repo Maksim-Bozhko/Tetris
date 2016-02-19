@@ -1,6 +1,6 @@
 #pragma once
 
-namespace MyTetris
+namespace Tetris
 {
 	struct Point
 	{

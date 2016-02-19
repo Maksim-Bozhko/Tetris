@@ -5,27 +5,27 @@
 //TODO: rotate other direction
 //TODO: check for memoryleaks all project
 
-using namespace MyTetris;
+using namespace Tetris;
 
 MenuPanel::MenuPanel()
 {
 
 }
 
-void MenuPanel::Draw(vec2d_cocos2d_Color4F& buffer)
+void MenuPanel::Draw(vec2d_tetris_color& buffer)
 {
 	//draw box for next shape
 	for (unsigned int x = 0; x < _width + 1; ++x)
 	{
-		buffer[_position.y + 0][_position.x + x] = cocos2d::Color4F::WHITE;
-		buffer[_position.y + _width + 1][_position.x + x] = cocos2d::Color4F::WHITE;
-		buffer[_position.y + _height - 1][_position.x + 1 + x] = cocos2d::Color4F::WHITE;
+		buffer[_position.y + 0][_position.x + x] = Color::white;
+		buffer[_position.y + _width + 1][_position.x + x] = Color::white;
+		buffer[_position.y + _height - 1][_position.x + 1 + x] = Color::white;
 	}
 
 	for (unsigned int y = 0; y < _height; ++y)
 	{
-		buffer[_position.y + y][_position.x] = cocos2d::Color4F::WHITE;
-		buffer[_position.y + y][_position.x + _width + 1] = cocos2d::Color4F::WHITE;
+		buffer[_position.y + y][_position.x] = Color::white;
+		buffer[_position.y + y][_position.x + _width + 1] = Color::white;
 	}
 
 	_shape.Draw(buffer);

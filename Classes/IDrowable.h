@@ -1,13 +1,28 @@
 #pragma once
 
-namespace MyTetris
+namespace Tetris
 
 {
-	typedef std::vector< std::vector<cocos2d::Color4F> > vec2d_cocos2d_Color4F;
+	enum class Color
+	{
+		black = 0,
+		white,
+		gray,
+		cyan,
+		blue,
+		orange,
+		yellow,
+		green,
+		purple,
+		red,
+		colorCount,
+	};
+	
+	typedef std::vector< std::vector<Color> > vec2d_tetris_color;
 	
 	class IDrawable
 	{
 	public:
-		virtual void Draw(vec2d_cocos2d_Color4F& buffer) = 0;
+		virtual void Draw(vec2d_tetris_color& buffer) = 0;
 	};
 };

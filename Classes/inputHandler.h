@@ -8,8 +8,9 @@
 //TODO: make original song
 //TODO: make menu
 //TODO: make score and levels
+//TODO: узнать можно ли сделать по другому, не нодом кокоса
 
-namespace MyTetris
+namespace Tetris
 {
 
 	class Command
@@ -41,7 +42,7 @@ namespace MyTetris
 		}
 		virtual bool tryToExecute(Shape& shape, Map& map)
 		{
-			return shape.Move(MyTetris::Point::LEFT, map);
+			return shape.Move(Tetris::Point::LEFT, map);
 		}
 	};
 

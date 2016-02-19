@@ -148,11 +148,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\gameController.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\TetrisScene.cpp" />
     <ClCompile Include="..\Classes\inputHandler.cpp" />
     <ClCompile Include="..\Classes\map.cpp" />
     <ClCompile Include="..\Classes\menuPanel.cpp" />
-    <ClCompile Include="..\Classes\render.cpp" />
     <ClCompile Include="..\Classes\shape.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="point.cpp" />
@@ -161,13 +160,12 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\gameController.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\TetrisScene.h" />
     <ClInclude Include="..\Classes\IDrowable.h" />
     <ClInclude Include="..\Classes\inputHandler.h" />
     <ClInclude Include="..\Classes\map.h" />
     <ClInclude Include="..\Classes\menuPanel.h" />
     <ClInclude Include="..\Classes\point.h" />
-    <ClInclude Include="..\Classes\render.h" />
     <ClInclude Include="..\Classes\shape.h" />
     <ClInclude Include="..\Classes\shapeGenerator.h" />
     <ClInclude Include="..\Classes\targetver.h" />

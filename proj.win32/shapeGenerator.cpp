@@ -1,7 +1,7 @@
 #include "../proj.win32/main.h"
 #include "shapeGenerator.h"
 
-using namespace MyTetris;
+using namespace Tetris;
 
 ShapeGenerator::ShapeGenerator()
 {

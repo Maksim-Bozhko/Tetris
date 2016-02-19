@@ -4,9 +4,9 @@
 //TODO:: check if there is two copies of listeners
 //TODO: make summary what I have learned
 
-using namespace MyTetris;
+using namespace Tetris;
 
-MyTetris::InputHandler::InputHandler()
+Tetris::InputHandler::InputHandler()
 {
 	//_resetCommandAfterSingleExecution = false;
 	_stopUntillNextFrame = false;
@@ -95,51 +95,10 @@ void InputHandler::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d
 }
 void InputHandler::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-	//TODO: сделать проще логику, запоминать последнюю нажатую клавишу, если отпущена последняя нажатая, то ресетить стейт
-	//TODO: посмотреть есить ли обработка именно зажатой клавиши
 	if (keyCode == _lastKeyPressed)
 	{
 		reset();
 	}
-	/*switch (keyCode)
-	{
-	case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
-		if (_currentCommand == _rotate)
-		{
-			_currentCommand = nullptr;
-			_stopUntillNextFrame = false;
-			_resetCommandAfterSingleExecution = false;
-			_firstCommand = false;
-		}
-		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-		if (_currentCommand == _moveDown)
-		{
-			_currentCommand = nullptr;
-			_stopUntillNextFrame = false;
-			_resetCommandAfterSingleExecution = false;
-			_firstCommand = false;
-		}
-		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		if (_currentCommand == _moveLeft)
-		{
-			_currentCommand = nullptr;
-			_stopUntillNextFrame = false;
-			_resetCommandAfterSingleExecution = false;
-			_firstCommand = false;
-		}
-		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		if (_currentCommand == _moveRight)
-		{
-			_currentCommand = nullptr;
-			_stopUntillNextFrame = false;
-			_resetCommandAfterSingleExecution = false;
-			_firstCommand = false;
-		}
-		break;
-	}*/
 }
 
 bool InputHandler::updateInput(std::chrono::time_point<std::chrono::system_clock>& previousTime)
@@ -182,7 +141,7 @@ bool InputHandler::updateInput(std::chrono::time_point<std::chrono::system_clock
 
 }
 
-void MyTetris::InputHandler::reset()
+void Tetris::InputHandler::reset()
 {
 	_currentCommand = nullptr;
 	_stopUntillNextFrame = false;

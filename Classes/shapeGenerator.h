@@ -3,7 +3,7 @@
 #include "shape.h"
 #include <random>
 
-namespace MyTetris
+namespace Tetris
 {
 	class ShapeGenerator
 	{

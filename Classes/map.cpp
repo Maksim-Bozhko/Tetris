@@ -1,7 +1,7 @@
 #include "../proj.win32/main.h"
 #include "map.h"
 
-using namespace MyTetris;
+using namespace Tetris;
 
 Map::Map()
 {
@@ -41,7 +41,7 @@ void Map::SetValueAt(const Point& position, TileType tileType)
 	_map[position.y][position.x] = tileType;
 };
 
-void Map::Draw(vec2d_cocos2d_Color4F& buffer)
+void Map::Draw(vec2d_tetris_color& buffer)
 {
 	TileType tileType = TileType::empty;
 
@@ -54,13 +54,13 @@ void Map::Draw(vec2d_cocos2d_Color4F& buffer)
 			switch (tileType)
 			{
 			case TileType::wall:
-				buffer[y][x] = cocos2d::Color4F::WHITE;
+				buffer[y][x] = Color::white;
 				break;
 			case TileType::brick:
-				buffer[y][x] = cocos2d::Color4F::GRAY;
+				buffer[y][x] = Color::gray;
 				break;
 			case TileType::empty:
-				buffer[y][x] = cocos2d::Color4F::BLACK;
+				buffer[y][x] = Color::black;
 				break;
 			}
 		}

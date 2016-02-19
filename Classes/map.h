@@ -2,7 +2,7 @@
 
 #include "IDrowable.h"
 
-namespace MyTetris
+namespace Tetris
 {
 	enum class TileType
 	{
@@ -36,7 +36,7 @@ namespace MyTetris
 
 		void Init();//move this to constructor
 
-		void Draw(vec2d_cocos2d_Color4F& buffer);
+		void Draw(vec2d_tetris_color& buffer);
 		void RemoveRow(size_t row);
 	};
 };

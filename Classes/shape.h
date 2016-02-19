@@ -7,7 +7,7 @@
 //TODO: проверить механизм посадки на баги
 //TODO: сделать механизм посадки проще и очевиднее
 
-namespace MyTetris
+namespace Tetris
 {
 
 	typedef std::vector< std::vector<unsigned char> > vec2d_unsignedChar;
@@ -33,7 +33,8 @@ namespace MyTetris
 		static const unsigned int _matrixSize = 4;//all shapes are represented inside 4x4 boxes
 		Point _matrixPosition;
 		ShapeType _shapeType;
-		cocos2d::Color4F _color;
+		//cocos2d::Color4F _color;
+		Color _color;
 	public:
 		//TODO: move this to private
 		bool _hasLanded;//to know if shape landed
@@ -51,7 +52,7 @@ namespace MyTetris
 			return _matrixRepresentation[position.y][position.x];
 		};
 		bool RotateClocklWise(Map& map);
-		void Draw(vec2d_cocos2d_Color4F& buffer);
+		void Draw(vec2d_tetris_color& buffer);
 		bool Move(const Point& direction, Map& map);
 		bool CheckForCollision(vec2d_unsignedChar& newMatrix, const Point& newPosition, Map& map);
 		bool TryToRotate(vec2d_unsignedChar& newMatrix, Point& newPosition, Map& map);

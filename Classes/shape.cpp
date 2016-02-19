@@ -3,7 +3,7 @@
 
 //TODO: make all more independent of y
 
-using namespace MyTetris;
+using namespace Tetris;
 
 Shape::Shape()
 {
@@ -40,21 +40,24 @@ Shape::Shape(ShapeType shapeType)
 		_matrixRepresentation[1][1] = 1;// 1 1 1 1
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
 		_matrixRepresentation[1][3] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(0.0f, 0.75f, 0.75f, 1.0f);//cyan
+										//_color = cocos2d::Color4F(0.0f, 0.75f, 0.75f, 1.0f);//cyan
+		_color = Color::cyan;
 		break;
 	case ShapeType::type_J:
 		_matrixRepresentation[0][0] = 1;// 1 0 0 0
 		_matrixRepresentation[1][0] = 1;// 1 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(0.0f, 0.0f, 0.75f, 1.0f);//blue
+										//_color = cocos2d::Color4F(0.0f, 0.0f, 0.75f, 1.0f);//blue
+		_color = Color::blue;
 		break;
 	case ShapeType::type_L:
 		_matrixRepresentation[0][2] = 1;// 0 0 1 0
 		_matrixRepresentation[1][0] = 1;// 1 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(1.0f, 165 / 255.0f, 0.0f, 1.0f);//orange
+										//_color = cocos2d::Color4F(1.0f, 165 / 255.0f, 0.0f, 1.0f);//orange
+		_color = Color::orange;
 		break;
 	case ShapeType::type_O:
 		_boxSize = 4;
@@ -62,28 +65,32 @@ Shape::Shape(ShapeType shapeType)
 		_matrixRepresentation[1][2] = 1;// 0 1 1 0
 		_matrixRepresentation[2][1] = 1;// 0 1 1 0
 		_matrixRepresentation[2][2] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(0.75f, 0.75f, 0.0f, 1.0f);//yellow
+										//_color = cocos2d::Color4F(0.75f, 0.75f, 0.0f, 1.0f);//yellow
+		_color = Color::yellow;
 		break;
 	case ShapeType::type_S:
 		_matrixRepresentation[0][1] = 1;// 0 1 1 0
 		_matrixRepresentation[0][2] = 1;// 1 1 0 0
 		_matrixRepresentation[1][0] = 1;// 0 0 0 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(0.0f, 0.75f, 0.0f, 1.0f);//green
+										//_color = cocos2d::Color4F(0.0f, 0.75f, 0.0f, 1.0f);//green
+		_color = Color::green;
 		break;
 	case ShapeType::type_T:
 		_matrixRepresentation[0][1] = 1;// 0 1 0 0
 		_matrixRepresentation[1][0] = 1;// 1 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(128 / 255.0f, 0.0f, 128 / 255.0f, 1.0f);//purple
+										//_color = cocos2d::Color4F(128 / 255.0f, 0.0f, 128 / 255.0f, 1.0f);//purple
+		_color = Color::purple;
 		break;
 	case ShapeType::type_Z:
 		_matrixRepresentation[0][0] = 1;// 1 1 0 0
 		_matrixRepresentation[0][1] = 1;// 0 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(0.75f, 0.0f, 0.0f, 1.0f);//red
+										//_color = cocos2d::Color4F(0.75f, 0.0f, 0.0f, 1.0f);//red
+		_color = Color::red;
 		break;
 	}
 }
@@ -109,21 +116,24 @@ void Shape::SetShape(ShapeType shapeType)
 		_matrixRepresentation[1][1] = 1;// 1 1 1 1
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
 		_matrixRepresentation[1][3] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(0.0f, 0.75f, 0.75f, 1.0f);//cyan
+		//_color = cocos2d::Color4F(0.0f, 0.75f, 0.75f, 1.0f);//cyan
+		_color = Color::cyan;
 		break;
 	case ShapeType::type_J:
 		_matrixRepresentation[0][0] = 1;// 1 0 0 0
 		_matrixRepresentation[1][0] = 1;// 1 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(0.0f, 0.0f, 0.75f, 1.0f);//blue
+		//_color = cocos2d::Color4F(0.0f, 0.0f, 0.75f, 1.0f);//blue
+		_color = Color::blue;
 		break;
 	case ShapeType::type_L:
 		_matrixRepresentation[0][2] = 1;// 0 0 1 0
 		_matrixRepresentation[1][0] = 1;// 1 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(1.0f, 165 / 255.0f, 0.0f, 1.0f);//orange
+		//_color = cocos2d::Color4F(1.0f, 165 / 255.0f, 0.0f, 1.0f);//orange
+		_color = Color::orange;
 		break;
 	case ShapeType::type_O:
 		_boxSize = 4;
@@ -131,28 +141,32 @@ void Shape::SetShape(ShapeType shapeType)
 		_matrixRepresentation[1][2] = 1;// 0 1 1 0
 		_matrixRepresentation[2][1] = 1;// 0 1 1 0
 		_matrixRepresentation[2][2] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(0.75f, 0.75f, 0.0f, 1.0f);//yellow
+		//_color = cocos2d::Color4F(0.75f, 0.75f, 0.0f, 1.0f);//yellow
+		_color = Color::yellow;
 		break;
 	case ShapeType::type_S:
 		_matrixRepresentation[0][1] = 1;// 0 1 1 0
 		_matrixRepresentation[0][2] = 1;// 1 1 0 0
 		_matrixRepresentation[1][0] = 1;// 0 0 0 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(0.0f, 0.75f, 0.0f, 1.0f);//green
+		//_color = cocos2d::Color4F(0.0f, 0.75f, 0.0f, 1.0f);//green
+		_color = Color::green;
 		break;
 	case ShapeType::type_T:
 		_matrixRepresentation[0][1] = 1;// 0 1 0 0
 		_matrixRepresentation[1][0] = 1;// 1 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(128 / 255.0f, 0.0f, 128 / 255.0f, 1.0f);//purple
+		//_color = cocos2d::Color4F(128 / 255.0f, 0.0f, 128 / 255.0f, 1.0f);//purple
+		_color = Color::purple;
 		break;
 	case ShapeType::type_Z:
 		_matrixRepresentation[0][0] = 1;// 1 1 0 0
 		_matrixRepresentation[0][1] = 1;// 0 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		_color = cocos2d::Color4F(0.75f, 0.0f, 0.0f, 1.0f);//red
+		//_color = cocos2d::Color4F(0.75f, 0.0f, 0.0f, 1.0f);//red
+		_color = Color::red;
 		break;
 	}
 }
@@ -209,7 +223,7 @@ bool Shape::RotateClocklWise(Map& map)
 	return success;
 }
 
-void Shape::Draw(vec2d_cocos2d_Color4F& buffer)
+void Shape::Draw(vec2d_tetris_color& buffer)
 {
 	Point position;
 	TileType tileType = TileType::empty;
@@ -225,8 +239,8 @@ void Shape::Draw(vec2d_cocos2d_Color4F& buffer)
 				position += _matrixPosition;
 				//make sure we are not out of borders, so shape can start above the screen
 				bool yIsInBorders = (0 <= position.y) && (position.y < buffer.size());
-				
-				if ( yIsInBorders && (0 <= position.x) && (position.x < buffer[position.y].size()) )
+
+				if (yIsInBorders && (0 <= position.x) && (position.x < buffer[position.y].size()))
 				{
 					buffer[position.y][position.x] = _color;
 				}
@@ -306,7 +320,7 @@ bool Shape::TryToRotate(vec2d_unsignedChar& newMatrix, Point& newPosition, Map& 
 	if (collisionHappened)//now we need to check if there is any wall kicks avaliable
 	{
 		//try to move to the left
-		newPosition = _matrixPosition + Point::LEFT;//TODO: make left,right,up,down
+		newPosition = _matrixPosition + Point::LEFT;
 		collisionHappened = CheckForCollision(newMatrix, newPosition, map);//if there is no collision function retruns false and we rotate shape
 		if (collisionHappened)//cant wall kick to the left, now lets try to the right
 		{

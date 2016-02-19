@@ -4,7 +4,7 @@
 
 //TODO: typedef for complicated types
 
-namespace MyTetris
+namespace Tetris
 {
 	class MenuPanel : public IDrawable, public cocos2d::Node
 	{
@@ -18,7 +18,7 @@ namespace MyTetris
 		cocos2d::Label* _scoreLabel;
 	public:
 		MenuPanel();
-		void Draw(vec2d_cocos2d_Color4F& buffer);
+		void Draw(vec2d_tetris_color& buffer);
 		void IncreaseScore();
 		void SetUpcomingShape(ShapeType shapeType);
 		void Init(const Map& map, cocos2d::Node& node);
