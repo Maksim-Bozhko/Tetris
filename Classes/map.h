@@ -3,7 +3,7 @@
 #include "IDrowable.h"
 
 namespace Tetris
-{
+{	
 	enum class TileType
 	{
 		empty,
@@ -18,7 +18,6 @@ namespace Tetris
 		static const unsigned int _width = 12;
 		static const unsigned int _height = 22;
 		std::vector< std::vector<TileType> > _map;
-		unsigned int _score;
 		const unsigned int _borderWidth = 1;
 
 	public:
@@ -32,7 +31,7 @@ namespace Tetris
 			return _map[position.y][position.x];
 		};
 
-		void SetValueAt(const Point& position, TileType tileType);
+		void SetValueAt(const Point& position, TileType tileType);//this is bad, noone should be able to set value from outside
 
 		void Init();//move this to constructor
 

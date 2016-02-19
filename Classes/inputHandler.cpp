@@ -8,14 +8,13 @@ using namespace Tetris;
 
 Tetris::InputHandler::InputHandler()
 {
-	//_resetCommandAfterSingleExecution = false;
 	_stopUntillNextFrame = false;
 	_firstExecution = false;
 	_currentCommand = nullptr;
 
-	_moveLeft = new MoveLeft;
-	_moveRight = new MoveRight;
-	_moveDown = new MoveDown;
+	_moveLeft = new Move( Point::LEFT, std::chrono::duration<float>((1 / 30.0f)) );
+	_moveRight = new Move(Point::RIGHT, std::chrono::duration<float>((1 / 30.0f)));
+	_moveDown = new Move(Point::DOWN, std::chrono::duration<float>((1 / 60.0f)));
 	_rotate = new Rotate;
 
 	_previousCommandTime = std::chrono::system_clock::now();
@@ -33,14 +32,13 @@ Tetris::InputHandler::InputHandler()
 
 InputHandler::InputHandler(Map* map, Shape* shape)
 {
-	//_resetCommandAfterSingleExecution = false;
 	_stopUntillNextFrame = false;
 	_firstExecution = false;
 	_currentCommand = nullptr;
 
-	_moveLeft = new MoveLeft;
-	_moveRight = new MoveRight;
-	_moveDown = new MoveDown;
+	_moveLeft = new Move(Point::LEFT, std::chrono::duration<float>((1 / 30.0f)));
+	_moveRight = new Move(Point::RIGHT, std::chrono::duration<float>((1 / 30.0f)));
+	_moveDown = new Move(Point::DOWN, std::chrono::duration<float>((1 / 60.0f)));
 	_rotate = new Rotate;
 
 	_previousCommandTime = std::chrono::system_clock::now();
@@ -72,7 +70,6 @@ void InputHandler::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d
 	{
 	case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
 		_currentCommand = _rotate;
-		//_resetCommandAfterSingleExecution = true;
 		_firstExecution = true;
 		_lastKeyPressed = keyCode;
 		break;
@@ -103,6 +100,7 @@ void InputHandler::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2
 
 bool InputHandler::updateInput(std::chrono::time_point<std::chrono::system_clock>& previousTime)
 {
+	//TODO: make this more simple
 	bool stateChanged = false;//to know if we need to redraw screen
 
 	auto currentTime = std::chrono::system_clock::now();
@@ -126,7 +124,6 @@ bool InputHandler::updateInput(std::chrono::time_point<std::chrono::system_clock
 				if (_currentCommand->GetCanBeRepeated() == false)
 				{
 					_currentCommand = nullptr;
-					//_resetCommandAfterSingleExecution = false;
 				}
 				else if (_firstExecution)
 				{
@@ -145,6 +142,5 @@ void Tetris::InputHandler::reset()
 {
 	_currentCommand = nullptr;
 	_stopUntillNextFrame = false;
-	//_resetCommandAfterSingleExecution = false;
 	_firstExecution = false;
 }

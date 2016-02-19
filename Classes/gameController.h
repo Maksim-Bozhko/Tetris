@@ -29,7 +29,6 @@ namespace Tetris
 		Map _map;
 		Shape _currentShape;//current block controlled by player
 		ShapeGenerator _shapeGenerator;
-		//Render _render;
 		//TetrisScene* _scene;
 		MenuPanel _menuPanel;
 		std::chrono::time_point<std::chrono::system_clock> _time;

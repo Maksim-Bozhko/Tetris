@@ -14,12 +14,9 @@ Map::Map()
 
 void Map::Init()
 {
-	for (unsigned int y = 0; y < _height; ++y)
+	for (auto& it : _map)
 	{
-		for (unsigned int x = 0; x < _width; ++x)
-		{
-			_map[y][x] = TileType::empty;
-		}
+		it.assign(_width, TileType::empty);
 	}
 
 	// Place bottom wall

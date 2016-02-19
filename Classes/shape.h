@@ -56,7 +56,7 @@ namespace Tetris
 		bool Move(const Point& direction, Map& map);
 		bool CheckForCollision(vec2d_unsignedChar& newMatrix, const Point& newPosition, Map& map);
 		bool TryToRotate(vec2d_unsignedChar& newMatrix, Point& newPosition, Map& map);
-		void LandShape(Map& map);
 		//void Update(std::chrono::time_point<std::chrono::system_clock>& previousTime);
+		void LandShape(Map& map);
 	};
 };

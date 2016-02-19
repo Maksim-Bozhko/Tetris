@@ -12,6 +12,15 @@ MenuPanel::MenuPanel()
 
 }
 
+MenuPanel::~MenuPanel()
+{
+	if (_scoreLabel)
+	{
+		_scoreLabel->release();
+	}
+}
+
+
 void MenuPanel::Draw(vec2d_tetris_color& buffer)
 {
 	//draw box for next shape
@@ -32,7 +41,7 @@ void MenuPanel::Draw(vec2d_tetris_color& buffer)
 
 	std::string scoreString;
 	scoreString = "Score: " + std::to_string(_score);
-	//_scoreLabel->setString(scoreString);
+	_scoreLabel->setString(scoreString);
 }
 
 void MenuPanel::IncreaseScore()
@@ -58,13 +67,14 @@ void MenuPanel::Init(const Map& map, cocos2d::Node& node)
 	_height = map.GetHeight();//height of panel is same as height of the map
 	
 	//TODO: check _scorelabel
-	/*if (_scoreLabel)
+
+	if (_scoreLabel)
 	{
 		node.removeChild(_scoreLabel);
-		_scoreLabel->release();
-	}*/
-	
-	/*if (_scoreLabel == nullptr)
+		_scoreLabel = nullptr;
+	}
+
+	if (_scoreLabel == nullptr)
 	{
 		_scoreLabel = cocos2d::Label::createWithTTF("Score: 0", "fonts/Marker Felt.ttf", 24);
 
@@ -73,5 +83,5 @@ void MenuPanel::Init(const Map& map, cocos2d::Node& node)
 		_scoreLabel->setName("scoreLabel");
 
 		node.addChild(_scoreLabel, 0);
-	}*/
+	}
 }

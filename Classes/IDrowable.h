@@ -22,7 +22,10 @@ namespace Tetris
 	
 	class IDrawable
 	{
+	private:
+		bool _stateChanged;
 	public:
+		IDrawable() { _stateChanged = false;  }
 		virtual void Draw(vec2d_tetris_color& buffer) = 0;
 	};
 };

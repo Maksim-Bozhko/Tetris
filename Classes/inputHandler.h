@@ -3,7 +3,6 @@
 #include "../proj.win32/main.h"
 
 #include "shape.h"
-//TODO: заменить все for(size_t i...) на for (auto&(!!!) it : container)
 //TODO: make sound for rotation and deleting row
 //TODO: make original song
 //TODO: make menu
@@ -32,43 +31,19 @@ namespace Tetris
 		const std::chrono::duration<float>& GetDelayBeforeHoldKey() const { return _delayBeforeHoldKey; }
 	};
 
-	class MoveLeft : public Command
+	class Move : public Command
 	{
-		
+	private:
+		Point _direction;
 	public:
-		MoveLeft() 
+		Move(const Point& direction, const std::chrono::duration<float>& minTimeForSingleCommand)
 		{
-			_minTimeForSingleCommand = std::chrono::duration<float>((1 / 30.0f));
+			_direction = direction;
+			_minTimeForSingleCommand = minTimeForSingleCommand;
 		}
 		virtual bool tryToExecute(Shape& shape, Map& map)
 		{
-			return shape.Move(Tetris::Point::LEFT, map);
-		}
-	};
-
-	class MoveRight : public Command
-	{
-	public:
-		MoveRight()
-		{
-			_minTimeForSingleCommand = std::chrono::duration<float>((1 / 30.0f));
-		}
-		virtual bool tryToExecute(Shape& shape, Map& map)
-		{
-			return shape.Move(Point::RIGHT, map);
-		}
-	};
-
-	class MoveDown : public Command
-	{
-	public:
-		MoveDown()
-		{
-			_minTimeForSingleCommand = std::chrono::duration<float>((1 / 60.0f));
-		}
-		virtual bool tryToExecute(Shape& shape, Map& map)
-		{
-			return shape.Move(Point::DOWN, map);
+			return shape.Move(_direction, map);
 		}
 	};
 
@@ -95,16 +70,12 @@ namespace Tetris
 		Command* _rotate;
 
 		std::chrono::time_point<std::chrono::system_clock> _previousCommandTime;
-		//const  std::chrono::milliseconds _timePerInputUpdate = std::chrono::milliseconds(25);
-		//const  std::chrono::milliseconds _timeForSingleAction = std::chrono::milliseconds(500);
 
 		cocos2d::EventListenerKeyboard* _eventListenerKeyboard;
 		Shape* _shape;
 		Map* _map;
 
 		Command* _currentCommand;
-
-		//bool _resetCommandAfterSingleExecution;
 		bool _stopUntillNextFrame;
 		bool _firstExecution;
 		cocos2d::EventKeyboard::KeyCode _lastKeyPressed;

@@ -44,6 +44,7 @@ bool GameController::Update(std::chrono::time_point<std::chrono::system_clock>& 
 
 			if (CheckIfGameIsOver())
 			{
+				//TODO: stop updates in TetrisScene
 				NewGame(*_tetrisNode);
 			}
 			else
