@@ -10,6 +10,11 @@ Map::Map()
 	{
 		it.resize(_width);
 	}
+
+	_borders.top = 0;
+	_borders.left = 0;
+	_borders.bottom = _height;
+	_borders.right = _width;
 }
 
 void Map::Init()
@@ -71,6 +76,26 @@ void Map::RemoveRow(size_t row)
 		for (size_t y = row; y > 0; --y)
 		{
 			_map[y][x] = _map[y - 1][x];
+		}
+	}
+}
+
+const Borders & Tetris::Map::GetBorders() const
+{
+	return _borders;
+}
+
+void Tetris::Map::onNotify(Subject* subject, Event event)
+{
+	std::vector<Point> positions = subject->GetPositions();
+	
+	for (auto& position : positions)
+	{
+		bool yIsInBorders = (0 <= position.y) && (position.y < _height);
+		bool xIsInBorders = (0 <= position.x) && (position.x < _width);
+		if (yIsInBorders && xIsInBorders)
+		{
+			SetValueAt(position, TileType::brick);
 		}
 	}
 }

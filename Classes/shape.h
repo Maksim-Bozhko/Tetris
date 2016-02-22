@@ -24,7 +24,7 @@ namespace Tetris
 		typeCount,
 	};
 
-	class Shape : public IDrawable
+	class Shape : public IDrawable, public Subject
 	{
 	private:
 		//TODO: make separate class for transformation
@@ -33,14 +33,14 @@ namespace Tetris
 		static const unsigned int _matrixSize = 4;//all shapes are represented inside 4x4 boxes
 		Point _matrixPosition;
 		ShapeType _shapeType;
-		//cocos2d::Color4F _color;
 		Color _color;
+		std::vector<Point> _positions;
 	public:
 		//TODO: move this to private
 		bool _hasLanded;//to know if shape landed
 
 		Shape();
-		Shape(ShapeType shapeType);
+		Shape(Map* map, ShapeType shapeType);
 		void SetShape(ShapeType shapeType);//TODO:move this to constructor
 		ShapeType GetShape() const;
 		void SetPosition(const Point& newPosition);
@@ -58,5 +58,6 @@ namespace Tetris
 		bool TryToRotate(vec2d_unsignedChar& newMatrix, Point& newPosition, Map& map);
 		//void Update(std::chrono::time_point<std::chrono::system_clock>& previousTime);
 		void LandShape(Map& map);
+		const std::vector<Point>& GetPositions();
 	};
 };

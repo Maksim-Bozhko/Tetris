@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IDrowable.h"
+#include "observer.h"
 
 namespace Tetris
 {	
@@ -11,8 +12,23 @@ namespace Tetris
 		shape,
 		brick,
 	};
-	
-	class Map : public IDrawable
+
+	struct Borders
+	{
+		unsigned int top;
+		unsigned int left;
+		unsigned int bottom;
+		unsigned int right;
+		Borders() 
+		{
+			top = 0;
+			left = 0;
+			bottom = 0;
+			right = 0;
+		}
+	};
+
+	class Map : public IDrawable, public Observer
 	{
 	private:
 		static const unsigned int _width = 12;
@@ -20,6 +36,7 @@ namespace Tetris
 		std::vector< std::vector<TileType> > _map;
 		const unsigned int _borderWidth = 1;
 
+		Borders _borders;
 	public:
 		Map();
 		unsigned int GetWidth() const { return _width; }; //TODO: make this more private
@@ -37,5 +54,9 @@ namespace Tetris
 
 		void Draw(vec2d_tetris_color& buffer);
 		void RemoveRow(size_t row);
+
+		const Borders& GetBorders() const;
+
+		virtual void onNotify(Subject* subject, Event event);
 	};
 };

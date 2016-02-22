@@ -148,18 +148,19 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\gameController.cpp" />
+    <ClCompile Include="..\Classes\point.cpp" />
+    <ClCompile Include="..\Classes\shapeGenerator.cpp" />
     <ClCompile Include="..\Classes\TetrisScene.cpp" />
     <ClCompile Include="..\Classes\inputHandler.cpp" />
     <ClCompile Include="..\Classes\map.cpp" />
     <ClCompile Include="..\Classes\menuPanel.cpp" />
     <ClCompile Include="..\Classes\shape.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="point.cpp" />
-    <ClCompile Include="shapeGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\gameController.h" />
+    <ClInclude Include="..\Classes\observer.h" />
     <ClInclude Include="..\Classes\TetrisScene.h" />
     <ClInclude Include="..\Classes\IDrowable.h" />
     <ClInclude Include="..\Classes\inputHandler.h" />

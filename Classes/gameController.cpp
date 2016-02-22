@@ -12,6 +12,7 @@ GameController::GameController() : _inputHandler(&_map, &_currentShape)
 	_objectsToDraw.push_back(&_currentShape);//last object is on top of every other
 
 	_stateChanged = false;
+	_currentShape.addObserver(&_map);
 }
 
 GameController::~GameController()

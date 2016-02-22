@@ -33,13 +33,13 @@
     <ClCompile Include="..\Classes\shape.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="shapeGenerator.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="point.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\TetrisScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\shapeGenerator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\point.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,6 +78,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TetrisScene.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\observer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -17,10 +17,12 @@ Shape::Shape()
 	}
 }
 
-Shape::Shape(ShapeType shapeType)
+Shape::Shape(Map* map, ShapeType shapeType)
 {
 	_shapeType = shapeType;
 	_hasLanded = false;
+
+	addObserver(map);
 
 	//initialize 2d array with 0
 	_matrixRepresentation.resize(_matrixSize);
@@ -350,7 +352,9 @@ void Shape::LandShape(Map& map)
 	//place landed brick on the map
 	Point position;
 
-	for (unsigned int y = 0; y < _boxSize; ++y)
+	notify(this, Event::SHAPE_LANDED);
+
+	/*for (unsigned int y = 0; y < _boxSize; ++y)
 	{
 		for (unsigned int x = 0; x < _boxSize; ++x)
 		{
@@ -366,6 +370,26 @@ void Shape::LandShape(Map& map)
 				}
 			}
 		}
+	}*/
+}
+
+const std::vector<Point>& Tetris::Shape::GetPositions()
+{
+	Point position;
+
+	for (unsigned int y = 0; y < _boxSize; ++y)
+	{
+		for (unsigned int x = 0; x < _boxSize; ++x)
+		{
+			if (_matrixRepresentation[y][x])
+			{
+				position.SetXY(x, y);
+				position += _matrixPosition;
+				_positions.push_back(position);
+			}
+		}
 	}
+
+	return _positions;
 }
 
