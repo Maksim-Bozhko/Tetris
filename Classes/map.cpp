@@ -87,15 +87,18 @@ const Borders & Tetris::Map::GetBorders() const
 
 void Tetris::Map::onNotify(Subject* subject, Event event)
 {
-	std::vector<Point> positions = subject->GetPositions();
-	
-	for (auto& position : positions)
+	if (event == Event::SHAPE_LANDED)
 	{
-		bool yIsInBorders = (0 <= position.y) && (position.y < _height);
-		bool xIsInBorders = (0 <= position.x) && (position.x < _width);
-		if (yIsInBorders && xIsInBorders)
+		std::vector<Point> positions = subject->GetPositions();
+
+		for (auto& position : positions)
 		{
-			SetValueAt(position, TileType::brick);
+			bool yIsInBorders = (0 <= position.y) && (position.y < _height);
+			bool xIsInBorders = (0 <= position.x) && (position.x < _width);
+			if (yIsInBorders && xIsInBorders)
+			{
+				SetValueAt(position, TileType::brick);
+			}
 		}
 	}
 }

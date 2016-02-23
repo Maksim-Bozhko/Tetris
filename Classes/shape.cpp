@@ -376,6 +376,7 @@ void Shape::LandShape(Map& map)
 const std::vector<Point>& Tetris::Shape::GetPositions()
 {
 	Point position;
+	_positions.clear();
 
 	for (unsigned int y = 0; y < _boxSize; ++y)
 	{
