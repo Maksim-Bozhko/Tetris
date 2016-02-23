@@ -3,6 +3,8 @@
 #include "IDrowable.h"
 #include "observer.h"
 
+//TODO:: шейп может зацепиться за верхний угол, исправить
+
 namespace Tetris
 {	
 	enum class TileType
@@ -28,7 +30,7 @@ namespace Tetris
 		}
 	};
 
-	class Map : public IDrawable, public Observer
+	class Map : public IDrawable, public Observer, public Subject
 	{
 	private:
 		static const unsigned int _width = 12;
@@ -58,5 +60,6 @@ namespace Tetris
 		const Borders& GetBorders() const;
 
 		virtual void onNotify(Subject* subject, Event event);
+		void CheckForFilledRow();
 	};
 };

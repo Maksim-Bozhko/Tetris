@@ -13,6 +13,7 @@ GameController::GameController() : _inputHandler(&_map, &_currentShape)
 
 	_stateChanged = false;
 	_currentShape.addObserver(&_map);
+	_map.addObserver(&_menuPanel);
 }
 
 GameController::~GameController()
@@ -39,9 +40,9 @@ bool GameController::Update(std::chrono::time_point<std::chrono::system_clock>& 
 	{
 		if (_currentShape._hasLanded)
 		{
-			_currentShape.LandShape(_map);
+			_currentShape.LandShape();
 
-			CheckForFilledRow();
+			//_map.CheckForFilledRow();
 
 			if (CheckIfGameIsOver())
 			{
@@ -79,7 +80,7 @@ void GameController::NewShape()
 	_inputHandler.reset();
 }
 
-void GameController::CheckForFilledRow()
+/*void GameController::CheckForFilledRow()
 {
 	Point position;
 	TileType tileType;
@@ -107,7 +108,7 @@ void GameController::CheckForFilledRow()
 			_menuPanel.IncreaseScore();
 		}
 	}
-}
+}*/
 
 bool GameController::CheckIfGameIsOver()
 {

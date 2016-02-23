@@ -6,7 +6,7 @@
 
 namespace Tetris
 {
-	class MenuPanel : public IDrawable
+	class MenuPanel : public IDrawable, public Observer
 	{
 	private:
 		Point _position;
@@ -22,6 +22,7 @@ namespace Tetris
 		void IncreaseScore();
 		void SetUpcomingShape(ShapeType shapeType);
 		void Init(const Map& map, cocos2d::Node& node);
+		void onNotify(Subject* subject, Event event);
 	};
 };
 

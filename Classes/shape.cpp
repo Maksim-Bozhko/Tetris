@@ -17,12 +17,10 @@ Shape::Shape()
 	}
 }
 
-Shape::Shape(Map* map, ShapeType shapeType)
+Shape::Shape(ShapeType shapeType)
 {
 	_shapeType = shapeType;
 	_hasLanded = false;
-
-	addObserver(map);
 
 	//initialize 2d array with 0
 	_matrixRepresentation.resize(_matrixSize);
@@ -297,8 +295,8 @@ bool Shape::CheckForCollision(vec2d_unsignedChar& newMatrix, const Point& newPos
 				position.SetXY(j, i);//j is column number, so j is x
 				position += newPosition;
 				//make sure we are not out of borders
-				bool yIsInBorders = (0 <= position.y) && (position.y < map.GetHeight());
-				bool xIsInBorders = (0 <= position.x) && (position.x < map.GetWidth());
+				bool yIsInBorders = (0 <= position.y) && (position.y < map.GetBorders().bottom);
+				bool xIsInBorders = (0 <= position.x) && (position.x < map.GetBorders().right);
 				if (yIsInBorders && xIsInBorders)
 				{
 					tileType = map.GetValueAt(position);
@@ -347,33 +345,15 @@ bool Shape::TryToRotate(vec2d_unsignedChar& newMatrix, Point& newPosition, Map& 
 	return !collisionHappened;
 }
 
-void Shape::LandShape(Map& map)
+void Shape::LandShape()
 {
 	//place landed brick on the map
 	Point position;
 
 	notify(this, Event::SHAPE_LANDED);
-
-	/*for (unsigned int y = 0; y < _boxSize; ++y)
-	{
-		for (unsigned int x = 0; x < _boxSize; ++x)
-		{
-			if (_matrixRepresentation[y][x])
-			{
-				position.SetXY(x, y);
-				position += _matrixPosition;
-				bool yIsInBorders = (0 <= position.y) && (position.y < map.GetHeight());
-				bool xIsInBorders = (0 <= position.x) && (position.x < map.GetWidth());
-				if (yIsInBorders && xIsInBorders)
-				{
-					map.SetValueAt(position, TileType::brick);
-				}
-			}
-		}
-	}*/
 }
 
-const std::vector<Point>& Tetris::Shape::GetPositions()
+const std::vector<Point>* Tetris::Shape::GetPositions()
 {
 	Point position;
 	_positions.clear();
@@ -391,6 +371,6 @@ const std::vector<Point>& Tetris::Shape::GetPositions()
 		}
 	}
 
-	return _positions;
+	return &_positions;
 }
 

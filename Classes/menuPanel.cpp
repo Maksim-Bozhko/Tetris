@@ -85,3 +85,11 @@ void MenuPanel::Init(const Map& map, cocos2d::Node& node)
 		node.addChild(_scoreLabel, 0);
 	}
 }
+
+void Tetris::MenuPanel::onNotify(Subject * subject, Event event)
+{
+	if (event == Event::ROW_FILLED)
+	{
+		IncreaseScore();
+	}
+}

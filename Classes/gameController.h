@@ -39,7 +39,7 @@ namespace Tetris
 		InputHandler _inputHandler;
 		const Tetris::Point _newShapePosition = Tetris::Point(4, -2);//starting point of new blocks
 
-		void CheckForFilledRow();//TODO: this shoud be done by map
+		//void CheckForFilledRow();//TODO: this shoud be done by map
 		cocos2d::Node* _tetrisNode;
 
 		bool _stateChanged;

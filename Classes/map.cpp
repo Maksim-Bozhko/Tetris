@@ -89,7 +89,7 @@ void Tetris::Map::onNotify(Subject* subject, Event event)
 {
 	if (event == Event::SHAPE_LANDED)
 	{
-		std::vector<Point> positions = subject->GetPositions();
+		std::vector<Point> positions = *( subject->GetPositions() );
 
 		for (auto& position : positions)
 		{
@@ -99,6 +99,37 @@ void Tetris::Map::onNotify(Subject* subject, Event event)
 			{
 				SetValueAt(position, TileType::brick);
 			}
+		}
+		
+		CheckForFilledRow();
+	}
+}
+
+void Map::CheckForFilledRow()
+{
+	//Point position;
+	TileType tileType;
+	bool filled = true;
+
+	size_t right = _width - _borderWidth;
+	size_t bottom = _height - _borderWidth;
+	for (size_t y = _borderWidth; y < bottom; ++y)
+	{
+		filled = true;
+		for (size_t x = _borderWidth; x < right; ++x)
+		{
+			//position.SetXY(x, y);
+			tileType = _map[y][x];
+			if (tileType == TileType::empty)
+			{
+				filled = false;
+				break;
+			}
+		}
+		if (filled)
+		{
+			RemoveRow(y);
+			notify(this, Event::ROW_FILLED);
 		}
 	}
 }

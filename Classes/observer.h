@@ -7,6 +7,7 @@ namespace Tetris
 	enum class Event
 	{
 		SHAPE_LANDED,
+		ROW_FILLED,
 		eventCount
 	};
 
@@ -51,7 +52,11 @@ namespace Tetris
 			_observers.erase(_observers.begin() + index);
 		}
 
-		virtual const std::vector<Point>& GetPositions() = 0;
+		//TODO: make this better
+		virtual const std::vector<Point>* GetPositions() 
+		{ 
+			return nullptr;
+		};
 	};
 }
 

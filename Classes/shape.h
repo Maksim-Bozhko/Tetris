@@ -40,7 +40,7 @@ namespace Tetris
 		bool _hasLanded;//to know if shape landed
 
 		Shape();
-		Shape(Map* map, ShapeType shapeType);
+		Shape(ShapeType shapeType);
 		void SetShape(ShapeType shapeType);//TODO:move this to constructor
 		ShapeType GetShape() const;
 		void SetPosition(const Point& newPosition);
@@ -57,7 +57,7 @@ namespace Tetris
 		bool CheckForCollision(vec2d_unsignedChar& newMatrix, const Point& newPosition, Map& map);
 		bool TryToRotate(vec2d_unsignedChar& newMatrix, Point& newPosition, Map& map);
 		//void Update(std::chrono::time_point<std::chrono::system_clock>& previousTime);
-		void LandShape(Map& map);
-		const std::vector<Point>& GetPositions();
+		void LandShape();
+		const std::vector<Point>* GetPositions();
 	};
 };
