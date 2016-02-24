@@ -27,11 +27,6 @@ namespace Tetris
 			return *this;
 		}
 
-		/*bool operator==(const Point& rhs)
-		{
-			return x == rhs.x && y == rhs.y;
-		}*/
-
 		static const Point UP;
 		static const Point DOWN;
 		static const Point LEFT;

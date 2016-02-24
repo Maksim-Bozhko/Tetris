@@ -12,6 +12,10 @@ private:
 
 	const unsigned int _screenWidth = 20;//TODO: make this more obvious
 	const unsigned int _screenHeight = 22;
+
+	cocos2d::Color4F GetEngineColorFromTetrisColor(const Tetris::Color color);
+	void Draw(std::vector<Tetris::IDrawable*>& objectsToDrow);
+
 public:
     static cocos2d::Scene* createScene();
 
@@ -24,12 +28,6 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(TetrisScene);
-
-	void Draw(std::vector<Tetris::IDrawable*>& objectsToDrow);
-
-	bool _stateChanged;
-
-	cocos2d::Color4F GetEngineColorFromTetrisColor(const Tetris::Color color);
 };
 
 //#endif // __HELLOWORLD_SCENE_H__

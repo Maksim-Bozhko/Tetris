@@ -11,8 +11,6 @@ GameController::GameController() : _inputHandler(&_map, &_currentShape)
 	_objectsToDraw.push_back(&_menuPanel);
 	_objectsToDraw.push_back(&_currentShape);//last object is on top of every other
 
-	_stateChanged = false;
-	_currentShape.addObserver(&_map);
 	_map.addObserver(&_menuPanel);
 }
 
@@ -21,12 +19,13 @@ GameController::~GameController()
 
 }
 
-void GameController::GameLoop(TetrisScene* scene)
+bool GameController::GameLoop()
 {
-	//WTF why 2 calls of draw
-	_stateChanged = false;
+	bool stateChanged = false;
 	
-	_stateChanged = _inputHandler.updateInput(_time) || Update(_time);
+	stateChanged = _inputHandler.updateInput(_time) || Update(_time);
+
+	return stateChanged;
 }
 
 bool GameController::Update(std::chrono::time_point<std::chrono::system_clock>& previousTime)
@@ -34,19 +33,18 @@ bool GameController::Update(std::chrono::time_point<std::chrono::system_clock>& 
 	bool stateChanged = false;//to know if we need to redraw screen
 
 	auto currentTime = std::chrono::system_clock::now();
-	auto deltaTime = (currentTime - previousTime);
+	auto elapsedTime = (currentTime - previousTime);
 
-	if (deltaTime > _timePerFrame)//ensure same amount of time per frame
+	if (elapsedTime > _timePerFrame)//ensure same amount of time per frame
 	{
-		if (_currentShape._hasLanded)
+		if (_currentShape.hasLanded())
 		{
-			_currentShape.LandShape();
+			_currentShape.LandShape(_map);
 
-			//_map.CheckForFilledRow();
+			_map.CheckForFilledRow();
 
 			if (CheckIfGameIsOver())
 			{
-				//TODO: stop updates in TetrisScene
 				NewGame(*_tetrisNode);
 			}
 			else
@@ -65,6 +63,7 @@ bool GameController::Update(std::chrono::time_point<std::chrono::system_clock>& 
 		}
 
 	}
+
 	return stateChanged;
 }
 
@@ -79,36 +78,6 @@ void GameController::NewShape()
 
 	_inputHandler.reset();
 }
-
-/*void GameController::CheckForFilledRow()
-{
-	Point position;
-	TileType tileType;
-	bool filled = true;
-
-	size_t borderWidth = _map.GetBorderWidth();
-	size_t right = _map.GetWidth() - borderWidth;
-	size_t bottom = _map.GetHeight() - borderWidth;
-	for (size_t y = borderWidth; y < bottom; ++y)
-	{
-		filled = true;
-		for (size_t x = borderWidth; x < right; ++x)
-		{
-			position.SetXY(x, y);
-			tileType = _map.GetValueAt(position);
-			if (tileType == TileType::empty)
-			{
-				filled = false;
-				break;
-			}
-		}
-		if (filled)
-		{
-			_map.RemoveRow(y);
-			_menuPanel.IncreaseScore();
-		}
-	}
-}*/
 
 bool GameController::CheckIfGameIsOver()
 {
@@ -151,9 +120,4 @@ void GameController::NewGame(cocos2d::Node& node)
 std::vector<IDrawable*>& Tetris::GameController::GetObjectsToDraw()
 {
 	return _objectsToDraw;
-}
-
-bool Tetris::GameController::GetStateChanged() const
-{
-	return _stateChanged;
 }

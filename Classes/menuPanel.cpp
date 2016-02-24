@@ -37,7 +37,7 @@ void MenuPanel::Draw(vec2d_tetris_color& buffer)
 		buffer[_position.y + y][_position.x + _width + 1] = Color::white;
 	}
 
-	_shape.Draw(buffer);
+	_upcomingShape.Draw(buffer);
 
 	std::string scoreString;
 	scoreString = "Score: " + std::to_string(_score);
@@ -51,23 +51,21 @@ void MenuPanel::IncreaseScore()
 
 void MenuPanel::SetUpcomingShape(ShapeType shapeType)
 {
-	_shape.SetShape(shapeType);
+	_upcomingShape.SetShape(shapeType);
 }
 
 void MenuPanel::Init(const Map& map, cocos2d::Node& node)
 {
-	//TODO: move this to constructor
 	_position.SetXY(map.GetWidth(), 0);//top left corner of menupanel
 	Point shapePosition = _position + Point(2, 2);//offset for upcoming shape
-	_shape.SetPosition(shapePosition);
+	_upcomingShape.SetPosition(shapePosition);
 	_score = 0;
 
-	_width = _shape.GetMatrixSize() + 2 * map.GetBorderWidth();//width of box where upcoming bos is shown
+	_width = _upcomingShape.GetMatrixSize() + 2 * map.GetBorderWidth();//width of box where upcoming bos is shown
 															   //move this to caclulate width, make more obvious
 	_height = map.GetHeight();//height of panel is same as height of the map
 	
 	//TODO: check _scorelabel
-
 	if (_scoreLabel)
 	{
 		node.removeChild(_scoreLabel);

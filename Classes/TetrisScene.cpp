@@ -32,6 +32,7 @@ void TetrisScene::Draw(std::vector<Tetris::IDrawable*>& objectsToDrow)
 
 	auto blocksNode = this->getChildByName("blocksNode");
 	blocksNode->removeAllChildren();
+
 	for (size_t i = 0; i < buffer.size(); ++i)
 	{
 		for (size_t j = 0; j < buffer[i].size(); ++j)
@@ -49,12 +50,13 @@ void TetrisScene::Draw(std::vector<Tetris::IDrawable*>& objectsToDrow)
 				if (engineColor == cocos2d::Color4F::WHITE)
 				{
 					rectNode->drawPolygon(rectangle, 4, cocos2d::Color4F::GRAY, 2, engineColor);
+					blocksNode->addChild(rectNode);
 				}
 				else
 				{
 					rectNode->drawPolygon(rectangle, 4, cocos2d::Color4F::BLACK, 2, engineColor);
+					blocksNode->addChild(rectNode);
 				}
-				blocksNode->addChild(rectNode);
 			}
 		}
 	}
@@ -62,7 +64,7 @@ void TetrisScene::Draw(std::vector<Tetris::IDrawable*>& objectsToDrow)
 cocos2d::Color4F TetrisScene::GetEngineColorFromTetrisColor(const Tetris::Color color)
 {
 	cocos2d::Color4F engineColor;
-	
+
 	switch (color)
 	{
 	case Tetris::Color::black:
@@ -102,31 +104,31 @@ cocos2d::Color4F TetrisScene::GetEngineColorFromTetrisColor(const Tetris::Color 
 
 Scene* TetrisScene::createScene()
 {
-    // 'scene' is an autorelease object
-    auto scene = Scene::create();
-    
-    // 'layer' is an autorelease object
-    auto layer = TetrisScene::create();
+	// 'scene' is an autorelease object
+	auto scene = Scene::create();
 
-    // add layer as a child to scene
-    scene->addChild(layer);
+	// 'layer' is an autorelease object
+	auto layer = TetrisScene::create();
 
-    // return the scene
-    return scene;
+	// add layer as a child to scene
+	scene->addChild(layer);
+
+	// return the scene
+	return scene;
 }
 
 // on "init" you need to initialize your instance
 bool TetrisScene::init()
 {
-    //////////////////////////////
-    // 1. super init first
-    if ( !Layer::init() )
-    {
-        return false;
-    }
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	//////////////////////////////
+	// 1. super init first
+	if (!Layer::init())
+	{
+		return false;
+	}
+
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	auto tetrisNode = cocos2d::Node::create();
 	tetrisNode->setName("tetrisNode");
@@ -141,27 +143,23 @@ bool TetrisScene::init()
 	Draw(_gameController.GetObjectsToDraw());
 
 	this->scheduleUpdate();
-	//this->resume();
-    
-    return true;
+
+	return true;
 }
 
 
 void TetrisScene::menuCloseCallback(Ref* pSender)
 {
-    Director::getInstance()->end();
+	Director::getInstance()->end();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
+	exit(0);
 #endif
 }
 
 void TetrisScene::update(float delta)
 {
-	//TODO: don't call update between games
-	_gameController.GameLoop(this);
-
-	if (_gameController.GetStateChanged())
+	if (_gameController.GameLoop())
 	{
 		Draw(_gameController.GetObjectsToDraw());
 	}

@@ -4,6 +4,9 @@
 #include "observer.h"
 
 //TODO:: шейп может зацепиться за верхний угол, исправить
+//TODO: make get/set definiton declaration more consistant
+//TODO: code convension
+//TODO: magic numbers, constants
 
 namespace Tetris
 {	
@@ -30,7 +33,7 @@ namespace Tetris
 		}
 	};
 
-	class Map : public IDrawable, public Observer, public Subject
+	class Map : public IDrawable, public Subject
 	{
 	private:
 		static const unsigned int _width = 12;
@@ -39,6 +42,8 @@ namespace Tetris
 		const unsigned int _borderWidth = 1;
 
 		Borders _borders;
+
+		void RemoveRow(size_t row);
 	public:
 		Map();
 		unsigned int GetWidth() const { return _width; }; //TODO: make this more private
@@ -52,14 +57,12 @@ namespace Tetris
 
 		void SetValueAt(const Point& position, TileType tileType);//this is bad, noone should be able to set value from outside
 
-		void Init();//move this to constructor
+		void Init();
 
 		void Draw(vec2d_tetris_color& buffer);
-		void RemoveRow(size_t row);
-
+		
 		const Borders& GetBorders() const;
 
-		virtual void onNotify(Subject* subject, Event event);
 		void CheckForFilledRow();
 	};
 };

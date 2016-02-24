@@ -51,12 +51,6 @@ namespace Tetris
 			}
 			_observers.erase(_observers.begin() + index);
 		}
-
-		//TODO: make this better
-		virtual const std::vector<Point>* GetPositions() 
-		{ 
-			return nullptr;
-		};
 	};
 }
 

@@ -3,6 +3,7 @@
 
 //TODO:: check if there is two copies of listeners
 //TODO: make summary what I have learned
+//TODO: why 2 constructors copy paste
 
 using namespace Tetris;
 
@@ -12,7 +13,7 @@ Tetris::InputHandler::InputHandler()
 	_firstExecution = false;
 	_currentCommand = nullptr;
 
-	_moveLeft = new Move( Point::LEFT, std::chrono::duration<float>((1 / 30.0f)) );
+	_moveLeft = new Move( Point::LEFT, std::chrono::duration<float>((1 / 30.0f)) );//TODO: dont like this
 	_moveRight = new Move(Point::RIGHT, std::chrono::duration<float>((1 / 30.0f)));
 	_moveDown = new Move(Point::DOWN, std::chrono::duration<float>((1 / 60.0f)));
 	_rotate = new Rotate;
@@ -121,7 +122,7 @@ bool InputHandler::updateInput(std::chrono::time_point<std::chrono::system_clock
 			{
 				_previousCommandTime = currentTime;
 
-				if (_currentCommand->GetCanBeRepeated() == false)
+				if (_currentCommand->canBeRepeated() == false)
 				{
 					_currentCommand = nullptr;
 				}

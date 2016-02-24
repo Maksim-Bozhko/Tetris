@@ -17,84 +17,6 @@ Shape::Shape()
 	}
 }
 
-Shape::Shape(ShapeType shapeType)
-{
-	_shapeType = shapeType;
-	_hasLanded = false;
-
-	//initialize 2d array with 0
-	_matrixRepresentation.resize(_matrixSize);
-	for (auto& it : _matrixRepresentation)
-	{
-		it.resize(_matrixSize);
-		it.assign(_matrixSize, 0);
-	}
-
-	_boxSize = 3;//most of shapes fit in box of size 3x3
-
-	switch (shapeType)
-	{//TODO: read this from json, actually move everything I can outside
-	case ShapeType::type_I:
-		_boxSize = 4;
-		_matrixRepresentation[1][0] = 1;// 0 0 0 0
-		_matrixRepresentation[1][1] = 1;// 1 1 1 1
-		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		_matrixRepresentation[1][3] = 1;// 0 0 0 0
-										//_color = cocos2d::Color4F(0.0f, 0.75f, 0.75f, 1.0f);//cyan
-		_color = Color::cyan;
-		break;
-	case ShapeType::type_J:
-		_matrixRepresentation[0][0] = 1;// 1 0 0 0
-		_matrixRepresentation[1][0] = 1;// 1 1 1 0
-		_matrixRepresentation[1][1] = 1;// 0 0 0 0
-		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-										//_color = cocos2d::Color4F(0.0f, 0.0f, 0.75f, 1.0f);//blue
-		_color = Color::blue;
-		break;
-	case ShapeType::type_L:
-		_matrixRepresentation[0][2] = 1;// 0 0 1 0
-		_matrixRepresentation[1][0] = 1;// 1 1 1 0
-		_matrixRepresentation[1][1] = 1;// 0 0 0 0
-		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-										//_color = cocos2d::Color4F(1.0f, 165 / 255.0f, 0.0f, 1.0f);//orange
-		_color = Color::orange;
-		break;
-	case ShapeType::type_O:
-		_boxSize = 4;
-		_matrixRepresentation[1][1] = 1;// 0 0 0 0
-		_matrixRepresentation[1][2] = 1;// 0 1 1 0
-		_matrixRepresentation[2][1] = 1;// 0 1 1 0
-		_matrixRepresentation[2][2] = 1;// 0 0 0 0
-										//_color = cocos2d::Color4F(0.75f, 0.75f, 0.0f, 1.0f);//yellow
-		_color = Color::yellow;
-		break;
-	case ShapeType::type_S:
-		_matrixRepresentation[0][1] = 1;// 0 1 1 0
-		_matrixRepresentation[0][2] = 1;// 1 1 0 0
-		_matrixRepresentation[1][0] = 1;// 0 0 0 0
-		_matrixRepresentation[1][1] = 1;// 0 0 0 0
-										//_color = cocos2d::Color4F(0.0f, 0.75f, 0.0f, 1.0f);//green
-		_color = Color::green;
-		break;
-	case ShapeType::type_T:
-		_matrixRepresentation[0][1] = 1;// 0 1 0 0
-		_matrixRepresentation[1][0] = 1;// 1 1 1 0
-		_matrixRepresentation[1][1] = 1;// 0 0 0 0
-		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-										//_color = cocos2d::Color4F(128 / 255.0f, 0.0f, 128 / 255.0f, 1.0f);//purple
-		_color = Color::purple;
-		break;
-	case ShapeType::type_Z:
-		_matrixRepresentation[0][0] = 1;// 1 1 0 0
-		_matrixRepresentation[0][1] = 1;// 0 1 1 0
-		_matrixRepresentation[1][1] = 1;// 0 0 0 0
-		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-										//_color = cocos2d::Color4F(0.75f, 0.0f, 0.0f, 1.0f);//red
-		_color = Color::red;
-		break;
-	}
-}
-
 void Shape::SetShape(ShapeType shapeType)
 {
 	_shapeType = shapeType;
@@ -116,7 +38,6 @@ void Shape::SetShape(ShapeType shapeType)
 		_matrixRepresentation[1][1] = 1;// 1 1 1 1
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
 		_matrixRepresentation[1][3] = 1;// 0 0 0 0
-		//_color = cocos2d::Color4F(0.0f, 0.75f, 0.75f, 1.0f);//cyan
 		_color = Color::cyan;
 		break;
 	case ShapeType::type_J:
@@ -124,7 +45,6 @@ void Shape::SetShape(ShapeType shapeType)
 		_matrixRepresentation[1][0] = 1;// 1 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		//_color = cocos2d::Color4F(0.0f, 0.0f, 0.75f, 1.0f);//blue
 		_color = Color::blue;
 		break;
 	case ShapeType::type_L:
@@ -132,7 +52,6 @@ void Shape::SetShape(ShapeType shapeType)
 		_matrixRepresentation[1][0] = 1;// 1 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		//_color = cocos2d::Color4F(1.0f, 165 / 255.0f, 0.0f, 1.0f);//orange
 		_color = Color::orange;
 		break;
 	case ShapeType::type_O:
@@ -141,7 +60,6 @@ void Shape::SetShape(ShapeType shapeType)
 		_matrixRepresentation[1][2] = 1;// 0 1 1 0
 		_matrixRepresentation[2][1] = 1;// 0 1 1 0
 		_matrixRepresentation[2][2] = 1;// 0 0 0 0
-		//_color = cocos2d::Color4F(0.75f, 0.75f, 0.0f, 1.0f);//yellow
 		_color = Color::yellow;
 		break;
 	case ShapeType::type_S:
@@ -149,7 +67,6 @@ void Shape::SetShape(ShapeType shapeType)
 		_matrixRepresentation[0][2] = 1;// 1 1 0 0
 		_matrixRepresentation[1][0] = 1;// 0 0 0 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
-		//_color = cocos2d::Color4F(0.0f, 0.75f, 0.0f, 1.0f);//green
 		_color = Color::green;
 		break;
 	case ShapeType::type_T:
@@ -157,7 +74,6 @@ void Shape::SetShape(ShapeType shapeType)
 		_matrixRepresentation[1][0] = 1;// 1 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		//_color = cocos2d::Color4F(128 / 255.0f, 0.0f, 128 / 255.0f, 1.0f);//purple
 		_color = Color::purple;
 		break;
 	case ShapeType::type_Z:
@@ -165,15 +81,9 @@ void Shape::SetShape(ShapeType shapeType)
 		_matrixRepresentation[0][1] = 1;// 0 1 1 0
 		_matrixRepresentation[1][1] = 1;// 0 0 0 0
 		_matrixRepresentation[1][2] = 1;// 0 0 0 0
-		//_color = cocos2d::Color4F(0.75f, 0.0f, 0.0f, 1.0f);//red
 		_color = Color::red;
 		break;
 	}
-}
-
-ShapeType Shape::GetShape() const
-{
-	return _shapeType;
 }
 
 void Shape::SetPosition(const Point& newPosition)
@@ -181,7 +91,7 @@ void Shape::SetPosition(const Point& newPosition)
 	_matrixPosition = newPosition;
 }
 
-bool Shape::RotateClocklWise(Map& map)
+bool Shape::RotateCounterClocklwise(Map& map)
 {
 	bool success = false;//to know if we actually changed state of the game
 	if (_hasLanded == false)
@@ -249,9 +159,15 @@ void Shape::Draw(vec2d_tetris_color& buffer)
 			//section for debugging purposes to see box around block
 			/*else
 			{
-			position.SetXY(x, y);
-			position += _matrixPosition;
-			buffer[position.y][position.x] = 'X';
+				position.SetXY(x, y);
+				position += _matrixPosition;
+				bool yIsInBorders = (0 <= position.y) && (position.y < buffer.size());
+
+				if (yIsInBorders && (0 <= position.x) && (position.x < buffer[position.y].size()))
+				{
+
+					buffer[position.y][position.x] = Color::white;
+				}
 			}*/
 		}
 	}
@@ -345,32 +261,29 @@ bool Shape::TryToRotate(vec2d_unsignedChar& newMatrix, Point& newPosition, Map& 
 	return !collisionHappened;
 }
 
-void Shape::LandShape()
-{
-	//place landed brick on the map
-	Point position;
-
-	notify(this, Event::SHAPE_LANDED);
-}
-
-const std::vector<Point>* Tetris::Shape::GetPositions()
+void Shape::LandShape(Map& map)
 {
 	Point position;
-	_positions.clear();
-
-	for (unsigned int y = 0; y < _boxSize; ++y)
+	
+	for (size_t y = 0; y < _boxSize; ++y)
 	{
-		for (unsigned int x = 0; x < _boxSize; ++x)
+		for (size_t x = 0; x < _boxSize; ++x)
 		{
 			if (_matrixRepresentation[y][x])
 			{
 				position.SetXY(x, y);
 				position += _matrixPosition;
-				_positions.push_back(position);
+
+				bool yIsInBorders = (0 <= position.y) && (position.y < map.GetBorders().bottom);
+				bool xIsInBorders = (0 <= position.x) && (position.x < map.GetBorders().right);
+
+				if (yIsInBorders && xIsInBorders)
+				{
+					map.SetValueAt(position, TileType::brick);
+				}
 			}
 		}
 	}
-
-	return &_positions;
+	
+	notify(this, Event::SHAPE_LANDED);
 }
-

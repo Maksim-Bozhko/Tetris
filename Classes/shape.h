@@ -34,30 +34,22 @@ namespace Tetris
 		Point _matrixPosition;
 		ShapeType _shapeType;
 		Color _color;
-		std::vector<Point> _positions;
-	public:
-		//TODO: move this to private
+
 		bool _hasLanded;//to know if shape landed
 
-		Shape();
-		Shape(ShapeType shapeType);
-		void SetShape(ShapeType shapeType);//TODO:move this to constructor
-		ShapeType GetShape() const;
-		void SetPosition(const Point& newPosition);
-		unsigned int GetBoxSize() const { return _boxSize; };
-		unsigned int GetMatrixSize() const { return _matrixSize; };
-		Point GetMatrixPosition() const { return _matrixPosition; };
-		unsigned char GetValueAt(const Point& position) const
-		{
-			return _matrixRepresentation[position.y][position.x];
-		};
-		bool RotateClocklWise(Map& map);
-		void Draw(vec2d_tetris_color& buffer);
-		bool Move(const Point& direction, Map& map);
 		bool CheckForCollision(vec2d_unsignedChar& newMatrix, const Point& newPosition, Map& map);
 		bool TryToRotate(vec2d_unsignedChar& newMatrix, Point& newPosition, Map& map);
-		//void Update(std::chrono::time_point<std::chrono::system_clock>& previousTime);
-		void LandShape();
-		const std::vector<Point>* GetPositions();
+	public:
+		bool hasLanded() const { return _hasLanded; };
+
+		Shape();
+		void SetShape(ShapeType shapeType);//TODO:move this to constructor
+		void SetPosition(const Point& newPosition);
+		unsigned int GetMatrixSize() const { return _matrixSize; };
+		bool RotateCounterClocklwise(Map& map);//TODO:rotate both directions, direction as argument
+		void Draw(vec2d_tetris_color& buffer);
+		bool Move(const Point& direction, Map& map);
+		
+		void LandShape(Map& map);
 	};
 };

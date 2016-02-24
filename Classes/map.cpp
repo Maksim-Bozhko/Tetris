@@ -3,6 +3,8 @@
 
 using namespace Tetris;
 
+//TODO: deal with borders
+
 Map::Map()
 {
 	_map.resize(_height);
@@ -80,34 +82,13 @@ void Map::RemoveRow(size_t row)
 	}
 }
 
-const Borders & Tetris::Map::GetBorders() const
+const Borders& Tetris::Map::GetBorders() const
 {
 	return _borders;
 }
 
-void Tetris::Map::onNotify(Subject* subject, Event event)
-{
-	if (event == Event::SHAPE_LANDED)
-	{
-		std::vector<Point> positions = *( subject->GetPositions() );
-
-		for (auto& position : positions)
-		{
-			bool yIsInBorders = (0 <= position.y) && (position.y < _height);
-			bool xIsInBorders = (0 <= position.x) && (position.x < _width);
-			if (yIsInBorders && xIsInBorders)
-			{
-				SetValueAt(position, TileType::brick);
-			}
-		}
-		
-		CheckForFilledRow();
-	}
-}
-
 void Map::CheckForFilledRow()
 {
-	//Point position;
 	TileType tileType;
 	bool filled = true;
 
@@ -118,7 +99,6 @@ void Map::CheckForFilledRow()
 		filled = true;
 		for (size_t x = _borderWidth; x < right; ++x)
 		{
-			//position.SetXY(x, y);
 			tileType = _map[y][x];
 			if (tileType == TileType::empty)
 			{

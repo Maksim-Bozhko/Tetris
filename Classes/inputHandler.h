@@ -8,6 +8,7 @@
 //TODO: make menu
 //TODO: make score and levels
 //TODO: узнать можно ли сделать по другому, не нодом кокоса
+//TODO: make more independent of cocos2d
 
 namespace Tetris
 {
@@ -26,7 +27,7 @@ namespace Tetris
 		}
 		virtual ~Command() {}
 		virtual bool tryToExecute(Shape& shape, Map& map) = 0;
-		const bool& GetCanBeRepeated() const { return _canBeRepeated; }
+		const bool& canBeRepeated() const { return _canBeRepeated; }
 		const std::chrono::duration<float>& GetMinTimeForSingleCommand() const { return _minTimeForSingleCommand; }
 		const std::chrono::duration<float>& GetDelayBeforeHoldKey() const { return _delayBeforeHoldKey; }
 	};
@@ -57,7 +58,7 @@ namespace Tetris
 		}
 		virtual bool tryToExecute(Shape& shape, Map& map)
 		{
-			return shape.RotateClocklWise(map);
+			return shape.RotateCounterClocklwise(map);
 		}
 	};
 
@@ -72,7 +73,7 @@ namespace Tetris
 		std::chrono::time_point<std::chrono::system_clock> _previousCommandTime;
 
 		cocos2d::EventListenerKeyboard* _eventListenerKeyboard;
-		Shape* _shape;
+		Shape* _shape;//TODO: weak pointer or no pointer here at all
 		Map* _map;
 
 		Command* _currentCommand;
