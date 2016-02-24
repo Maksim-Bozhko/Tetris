@@ -5,6 +5,8 @@
 #include "cocos2d.h"
 #include "gameController.h"
 
+//TODO: clean repository from .obj files, etc
+
 class TetrisScene : public cocos2d::Layer
 {
 private:
