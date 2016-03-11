@@ -44,6 +44,7 @@ namespace Tetris
 		Borders _borders;
 
 		void RemoveRow(size_t row);
+		void SetValueAt(const Point& position, TileType tileType);//this is bad, noone should be able to set value from outside
 	public:
 		Map();
 		unsigned int GetWidth() const { return _width; }; //TODO: make this more private
@@ -55,8 +56,6 @@ namespace Tetris
 			return _map[position.y][position.x];
 		};
 
-		void SetValueAt(const Point& position, TileType tileType);//this is bad, noone should be able to set value from outside
-
 		void Init();
 
 		void Draw(vec2d_tetris_color& buffer);
@@ -64,5 +63,7 @@ namespace Tetris
 		const Borders& GetBorders() const;
 
 		void CheckForFilledRow();
+
+		friend class Shape;
 	};
 };

@@ -9,7 +9,6 @@ Shape::Shape()
 {
 	_hasLanded = false;
 
-
 	_matrixRepresentation.resize(_matrixSize);
 	for (auto& it : _matrixRepresentation)
 	{
@@ -212,15 +211,24 @@ bool Shape::CheckForCollision(vec2d_unsignedChar& newMatrix, const Point& newPos
 				position += newPosition;
 				//make sure we are not out of borders
 				bool yIsInBorders = (0 <= position.y) && (position.y < map.GetBorders().bottom);
-				bool xIsInBorders = (0 <= position.x) && (position.x < map.GetBorders().right);
-				if (yIsInBorders && xIsInBorders)
+				bool xIsInBorders = (0 < position.x) && (position.x < map.GetBorders().right - 1);
+				//TODO: this is bug fix, but it looks bad
+				if (xIsInBorders)
 				{
-					tileType = map.GetValueAt(position);
-					if (tileType == TileType::wall || tileType == TileType::brick)//block section is inside the wall or other block
+					if (yIsInBorders)
 					{
-						collisionHappened = true;
-						break;
+						tileType = map.GetValueAt(position);
+						if (tileType == TileType::wall || tileType == TileType::brick)//block section is inside the wall or other block
+						{
+							collisionHappened = true;
+							break;
+						}
 					}
+				}
+				else
+				{ 
+					collisionHappened = true;
+					break;
 				}
 			}
 		}
